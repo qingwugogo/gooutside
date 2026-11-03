@@ -1,0 +1,9 @@
+{
+  "name": "playground-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "有空带娃去玩吧——共享免费游乐场查找地图小程序",
+  "dependencies": {
+    "@tencent-ai/workbuddy-cloud-sdk": "dev"
+  }
+}

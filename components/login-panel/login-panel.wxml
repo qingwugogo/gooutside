@@ -1,0 +1,44 @@
+<view class="login">
+    <text class="login-title">{{t.title}}</text>
+    <text class="login-desc">{{t.desc}}</text>
+
+    <button
+        class="login-wechat"
+        loading="{{wxLoggingIn}}"
+        disabled="{{wxLoggingIn}}"
+        bindtap="onWechatLogin"
+    >{{t.wechat}}</button>
+
+    <view class="login-alt" bindtap="toggleEmail">{{showEmail ? t.altHide : t.altShow}}</view>
+
+    <block wx:if="{{showEmail}}">
+        <input
+            class="login-input"
+            type="text"
+            placeholder="{{t.emailPh}}"
+            placeholder-class="login-placeholder"
+            value="{{email}}"
+            bindinput="onEmailInput"
+        />
+
+        <view class="login-row">
+            <input
+                class="login-input login-code"
+                placeholder="{{t.codePh}}"
+                placeholder-class="login-placeholder"
+                value="{{code}}"
+                bindinput="onCodeInput"
+                bindconfirm="submit"
+            />
+            <view
+                class="login-send {{sending || countdown > 0 ? 'login-send-disabled' : ''}}"
+                bindtap="sendCode"
+            >{{countdown > 0 ? sendLabel : (sending ? t.sending : t.getCode)}}</view>
+        </view>
+
+        <button class="login-button" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submit">{{t.emailSubmit}}</button>
+    </block>
+
+    <text class="login-tip" wx:if="{{tip}}">{{tip}}</text>
+    <text class="login-error" wx:if="{{error}}">{{error}}</text>
+</view>

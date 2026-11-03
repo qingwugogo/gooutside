@@ -1,0 +1,92 @@
+<view class="page">
+    <!-- 加载登录态 -->
+    <view class="state-block" wx:if="{{authState === 'checking'}}">
+        <text class="state-title">{{t.checking}}</text>
+    </view>
+
+    <!-- 未登录 -->
+    <view class="login-wrap" wx:elif="{{authState === 'signed-out'}}">
+        <login-panel bind:signedin="onSignedIn" />
+    </view>
+
+    <!-- 表单 -->
+    <block wx:else>
+        <view class="card form-card">
+            <view class="target">
+                <text class="target-label">{{t.targetLabel}}</text>
+                <text class="target-name">{{playgroundName || t.targetLoading}}</text>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.rateLabel}}</text>
+                <view class="rate-row">
+                    <text
+                        wx:for="{{ratingList}}"
+                        wx:key="*this"
+                        class="rate-star {{rating >= item ? 'rate-star-on' : ''}}"
+                        data-value="{{item}}"
+                        bindtap="onRate"
+                    >★</text>
+                </view>
+                <text class="rate-text" wx:if="{{ratingText}}">{{ratingText}}</text>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.contentLabel}}</text>
+                <textarea
+                    class="form-textarea"
+                    value="{{content}}"
+                    maxlength="500"
+                    placeholder="{{t.contentHint}}"
+                    placeholder-class="placeholder"
+                    bindinput="onContentInput"
+                ></textarea>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.photoLabel}}</text>
+                <view class="photo-row">
+                    <view class="photo-box" wx:for="{{photos}}" wx:key="tempPath">
+                        <image
+                            class="photo-img"
+                            src="{{item.tempPath}}"
+                            mode="aspectFill"
+                            data-src="{{item.tempPath}}"
+                            bindtap="onPreviewPhoto"
+                        />
+                        <view class="photo-del" data-index="{{index}}" catchtap="onRemovePhoto">×</view>
+                    </view>
+                    <view class="photo-add" wx:if="{{photos.length < 4}}" bindtap="onChoosePhoto">＋</view>
+                </view>
+            </view>
+
+            <view class="consent">
+                <view class="consent-row" bindtap="onToggleAgreed">
+                    <view class="consent-box {{agreed ? 'consent-box-on' : ''}}">{{agreed ? '✓' : ''}}</view>
+                    <view class="consent-text">
+                        <text>{{t.consent1a}} </text>
+                        <text class="consent-link" data-type="terms" catchtap="onOpenLegal">{{t.terms}}</text>
+                        <text> {{t.and}} </text>
+                        <text class="consent-link" data-type="privacy" catchtap="onOpenLegal">{{t.privacy}}</text>
+                    </view>
+                </view>
+                <view class="consent-row" bindtap="onToggleRights">
+                    <view class="consent-box {{rightsConfirmed ? 'consent-box-on' : ''}}">{{rightsConfirmed ? '✓' : ''}}</view>
+                    <view class="consent-text">
+                        <text>{{t.consent2a}}</text>
+                        <text class="consent-link" data-type="children" catchtap="onOpenLegal">{{t.guardianConsent}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <text class="form-error" wx:if="{{error}}">{{error}}</text>
+        </view>
+
+        <button
+            class="btn-primary submit-btn"
+            loading="{{submitting}}"
+            disabled="{{submitting}}"
+            bindtap="submit"
+        >{{submitting ? submitTip : t.submit}}</button>
+    </block>
+</view>

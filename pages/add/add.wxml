@@ -1,0 +1,107 @@
+<view class="page">
+    <view class="state-block" wx:if="{{authState === 'checking'}}">
+        <text class="state-title">{{t.checking}}</text>
+    </view>
+
+    <view class="login-wrap" wx:elif="{{authState === 'signed-out'}}">
+        <login-panel bind:signedin="onSignedIn" />
+    </view>
+
+    <block wx:else>
+        <view class="card form-card">
+            <view class="form-item">
+                <text class="form-label">{{t.nameLabel}} <text class="required">*</text></text>
+                <input
+                    class="form-input"
+                    value="{{name}}"
+                    maxlength="30"
+                    placeholder="{{t.nameHint}}"
+                    placeholder-class="placeholder"
+                    bindinput="onNameInput"
+                />
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.locLabel}} <text class="required">*</text></text>
+                <view class="loc-btn" wx:if="{{!location}}" bindtap="onChooseLocation">{{t.pickOnMap}}</view>
+                <view class="loc-result" wx:else>
+                    <view class="loc-text-wrap">
+                        <text class="loc-name">{{location.name || t.pickedDefault}}</text>
+                        <text class="loc-addr" wx:if="{{location.address}}">{{location.address}}</text>
+                    </view>
+                    <text class="loc-clear" catchtap="onClearLocation">{{t.repick}}</text>
+                </view>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.tagLabel}}</text>
+                <view class="tag-wrap">
+                    <text
+                        wx:for="{{tagOptions}}"
+                        wx:key="value"
+                        class="tag-select {{item.checked ? 'tag-on' : ''}}"
+                        data-tag="{{item.value}}"
+                        bindtap="onToggleTag"
+                    >{{item.label}}</text>
+                </view>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.descLabel}}</text>
+                <textarea
+                    class="form-textarea"
+                    value="{{description}}"
+                    maxlength="500"
+                    placeholder="{{t.descHint}}"
+                    placeholder-class="placeholder"
+                    bindinput="onDescInput"
+                ></textarea>
+            </view>
+
+            <view class="form-item">
+                <text class="form-label">{{t.photoLabel}}</text>
+                <view class="photo-row">
+                    <view class="photo-box" wx:for="{{photos}}" wx:key="tempPath">
+                        <image
+                            class="photo-img"
+                            src="{{item.tempPath}}"
+                            mode="aspectFill"
+                            data-src="{{item.tempPath}}"
+                            bindtap="onPreviewPhoto"
+                        />
+                        <view class="photo-del" data-index="{{index}}" catchtap="onRemovePhoto">×</view>
+                    </view>
+                    <view class="photo-add" wx:if="{{photos.length < 6}}" bindtap="onChoosePhoto">＋</view>
+                </view>
+            </view>
+
+            <view class="consent">
+                <view class="consent-row" bindtap="onToggleAgreed">
+                    <view class="consent-box {{agreed ? 'consent-box-on' : ''}}">{{agreed ? '✓' : ''}}</view>
+                    <view class="consent-text">
+                        <text>{{t.consent1a}} </text>
+                        <text class="consent-link" data-type="terms" catchtap="onOpenLegal">{{t.terms}}</text>
+                        <text> {{t.and}} </text>
+                        <text class="consent-link" data-type="privacy" catchtap="onOpenLegal">{{t.privacy}}</text>
+                    </view>
+                </view>
+                <view class="consent-row" bindtap="onToggleRights">
+                    <view class="consent-box {{rightsConfirmed ? 'consent-box-on' : ''}}">{{rightsConfirmed ? '✓' : ''}}</view>
+                    <view class="consent-text">
+                        <text>{{t.consent2a}}</text>
+                        <text class="consent-link" data-type="children" catchtap="onOpenLegal">{{t.guardianConsent}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <text class="form-error" wx:if="{{error}}">{{error}}</text>
+        </view>
+
+        <button
+            class="btn-primary submit-btn"
+            loading="{{submitting}}"
+            disabled="{{submitting}}"
+            bindtap="submit"
+        >{{submitting ? submitTip : t.submit}}</button>
+    </block>
+</view>

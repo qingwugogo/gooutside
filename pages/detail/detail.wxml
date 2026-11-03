@@ -1,0 +1,115 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="page">
+    <view class="state-block" wx:if="{{state === 'loading'}}">
+        <text class="state-title">{{t.loading}}</text>
+    </view>
+
+    <view class="state-block" wx:elif="{{state === 'error'}}">
+        <text class="state-title">{{t.loadFailed}}</text>
+        <text class="state-desc">{{errorMessage}}</text>
+        <view class="state-retry" bindtap="onRetry">{{t.retry}}</view>
+    </view>
+
+    <block wx:else>
+        <scroll-view scroll-y class="detail-scroll">
+            <!-- 基本信息 -->
+            <view class="card section">
+                <view class="head-row">
+                    <text class="name">{{playground.name}}</text>
+                    <text class="free-badge">{{t.free}}</text>
+                    <text class="more-btn" catchtap="onPlaygroundMore">···</text>
+                </view>
+                <view class="rating-row">
+                    <text class="stars stars-big">{{stars}}</text>
+                    <text class="rating-num" wx:if="{{ratingCount > 0}}">{{ratingAvg}}</text>
+                    <text class="rating-count">{{fmt.reviewMeta(lang, ratingCount > 0 ? ratingAvg : 0, ratingCount)}}</text>
+                </view>
+                <text class="address address-nav" wx:if="{{playground.address}}" bindtap="onNavigate">📍 {{playground.address}} <text class="nav-hint">{{t.navigate}}</text></text>
+                <view class="tags" wx:if="{{playground.tags.length > 0}}">
+                    <text class="tag" wx:for="{{playground.tags}}" wx:key="*this">{{fmt.tag(lang, item)}}</text>
+                </view>
+                <text class="desc" wx:if="{{playground.description}}">{{playground.description}}</text>
+            </view>
+
+            <!-- 场景图 -->
+            <view class="card section" wx:if="{{photoCount > 0}}">
+                <view class="section-head">
+                    <text class="section-title">{{t.photosTitle}}</text>
+                    <text class="section-sub">{{fmt.cnt(lang, photoCount, ' 张', ' photos')}}</text>
+                </view>
+                <view class="photo-grid" wx:if="{{signedIn}}">
+                    <image
+                        wx:for="{{photoUrls}}"
+                        wx:key="*this"
+                        class="photo-cell"
+                        src="{{item}}"
+                        mode="aspectFill"
+                        data-src="{{item}}"
+                        bindtap="onPreviewPhoto"
+                    />
+                </view>
+                <view wx:else class="photo-lock">
+                    <text class="photo-lock-text">{{t.photoLock}}</text>
+                    <view class="photo-lock-btn" bindtap="onGoLogin">{{t.goLogin}}</view>
+                </view>
+            </view>
+
+            <!-- 评价 -->
+            <view class="card section">
+                <view class="section-head">
+                    <text class="section-title">{{t.reviewsTitle}}</text>
+                    <text class="section-sub">{{fmt.cnt(lang, ratingCount, ' 条', '')}}</text>
+                </view>
+
+                <view wx:if="{{reviews.length === 0}}" class="review-empty">
+                    <text>{{t.reviewEmpty}}</text>
+                </view>
+
+                <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+                    <view class="review-top">
+                        <view class="avatar">{{item.ownerName[0]}}</view>
+                        <view class="review-meta">
+                            <text class="review-name">{{item.ownerName}}</text>
+                            <text class="review-date">{{item.dateText}}</text>
+                        </view>
+                        <text class="stars">{{item.stars}}</text>
+                        <text
+                            class="more-btn review-more"
+                            data-rid="{{item.id}}"
+                            data-owner="{{item.ownerId}}"
+                            catchtap="onReviewMore"
+                        >···</text>
+                    </view>
+                    <text class="review-content" wx:if="{{item.content}}">{{item.content}}</text>
+                    <view class="photo-grid review-grid" wx:if="{{item.photoUrls.length > 0}}">
+                        <image
+                            wx:for="{{item.photoUrls}}"
+                            wx:for-item="url"
+                            wx:key="*this"
+                            class="photo-cell"
+                            src="{{url}}"
+                            mode="aspectFill"
+                            data-rid="{{item.id}}"
+                            data-src="{{url}}"
+                            bindtap="onPreviewReviewPhoto"
+                        />
+                    </view>
+                </view>
+            </view>
+            <view class="bottom-space"></view>
+        </scroll-view>
+
+        <!-- 底部操作 -->
+        <view class="action-bar">
+            <button class="action-btn action-review" bindtap="onWriteReview">{{t.writeReview}}</button>
+            <button class="action-btn action-nav" bindtap="onNavigate">
+                <text class="nav-ico">➤</text>
+                <text>{{t.navigateBtn}}</text>
+            </button>
+            <button class="action-icon" open-type="share">
+                <text class="share-ico">⤴</text>
+                <text class="share-label">{{t.shareBtn}}</text>
+            </button>
+        </view>
+    </block>
+</view>

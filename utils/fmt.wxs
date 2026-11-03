@@ -1,0 +1,40 @@
+// WXS：模板内的本地化格式化（数量单位、设施标签、评价摘要）
+var TAG_EN = {
+    '滑梯': 'Slides',
+    '秋千': 'Swings',
+    '沙池': 'Sandpit',
+    '攀爬架': 'Climbing frame',
+    '跷跷板': 'Seesaw',
+    '摇摇乐': 'Spring rider',
+    '有遮阳': 'Shaded',
+    '有卫生间': 'Restroom',
+    '有停车位': 'Parking',
+    '适合幼儿': 'Toddlers',
+    '适合大童': 'Big kids',
+    '塑胶地面': 'Rubber floor'
+};
+
+// 数量 + 单位：lang==='en' 时用英文单位
+function cnt(lang, n, zhUnit, enUnit) {
+    if (lang === 'en') return n + (enUnit ? ' ' + enUnit : '');
+    return n + (zhUnit || '');
+}
+
+// 评价摘要：'4.5 · 3 条评价' / 'No reviews yet'
+function reviewMeta(lang, avg, n) {
+    if (!n) return lang === 'en' ? 'No reviews yet' : '暂无评价';
+    var unit = lang === 'en' ? ' reviews' : ' 条评价';
+    return avg + ' · ' + n + unit;
+}
+
+// 设施标签翻译
+function tag(lang, value) {
+    if (lang === 'en' && TAG_EN[value]) return TAG_EN[value];
+    return value;
+}
+
+module.exports = {
+    cnt: cnt,
+    reviewMeta: reviewMeta,
+    tag: tag
+};

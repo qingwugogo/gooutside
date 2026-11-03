@@ -1,0 +1,94 @@
+.page {
+    min-height: 100vh;
+    padding-bottom: 60rpx;
+    background: #F6F7F5;
+}
+
+.tabs {
+    background: #ffffff;
+    border-bottom: 1rpx solid #EDEFEC;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.tabs-inner {
+    display: flex;
+    padding: 0 20rpx;
+}
+
+.tab {
+    padding: 26rpx 22rpx 22rpx;
+    font-size: 27rpx;
+    color: #7d858f;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.tab-active {
+    color: #2E7D5B;
+    font-weight: 600;
+}
+
+.tab-active::after {
+    content: '';
+    position: absolute;
+    left: 22rpx;
+    right: 22rpx;
+    bottom: 8rpx;
+    height: 4rpx;
+    border-radius: 2rpx;
+    background: #2E7D5B;
+}
+
+.doc {
+    margin: 24rpx 24rpx 0;
+    padding: 40rpx 34rpx 48rpx;
+    background: #ffffff;
+    border-radius: 20rpx;
+}
+
+.doc-title {
+    display: block;
+    font-size: 36rpx;
+    font-weight: 700;
+    margin-bottom: 28rpx;
+}
+
+.doc-h {
+    display: block;
+    margin: 34rpx 0 14rpx;
+    font-size: 29rpx;
+    font-weight: 600;
+    color: #1f2329;
+}
+
+.doc-p {
+    display: block;
+    font-size: 26rpx;
+    line-height: 1.85;
+    color: #4b5158;
+    word-break: break-all;
+}
+
+.doc-li {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10rpx;
+}
+
+.doc-dot {
+    flex-shrink: 0;
+    margin-right: 12rpx;
+    font-size: 26rpx;
+    line-height: 1.85;
+    color: #2E7D5B;
+}
+
+.doc-foot {
+    display: block;
+    margin-top: 44rpx;
+    font-size: 22rpx;
+    color: #a8b1c0;
+}

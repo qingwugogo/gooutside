@@ -1,0 +1,113 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="page">
+    <!-- 地图区 -->
+    <view class="map-wrap">
+        <map
+            id="playgroundMap"
+            class="map"
+            latitude="{{latitude}}"
+            longitude="{{longitude}}"
+            scale="{{scale}}"
+            markers="{{markers}}"
+            show-location
+            bindmarkertap="onMarkerTap"
+        ></map>
+
+        <!-- 距离筛选 -->
+        <view class="radius-bar">
+            <scroll-view scroll-x enhanced show-scrollbar="{{false}}" class="radius-scroll">
+                <view class="radius-inner">
+                    <view
+                        wx:for="{{radiusOptions}}"
+                        wx:key="key"
+                        class="chip {{radiusKey === item.key ? 'chip-active' : ''}}"
+                        data-key="{{item.key}}"
+                        bindtap="onChooseRadius"
+                    >{{item.label}}</view>
+                </view>
+            </scroll-view>
+        </view>
+
+        <!-- 重新定位 -->
+        <view class="locate-btn" bindtap="onRelocate">
+            <text class="locate-icon">⌖</text>
+        </view>
+    </view>
+
+    <!-- 结果面板 -->
+    <view class="panel">
+        <view class="panel-head">
+            <text class="panel-title">{{t.panelTitle}}</text>
+            <text class="panel-count">{{fmt.cnt(lang, totalCount, ' 个', '')}}</text>
+        </view>
+
+        <scroll-view scroll-y class="panel-list" scroll-into-view="{{scrollTopId}}" scroll-with-animation>
+            <!-- 定位失败 -->
+            <view class="state-block" wx:if="{{locationState === 'error'}}">
+                <text class="state-title">{{t.noLocTitle}}</text>
+                <text class="state-desc">{{errorMessage}}</text>
+                <view class="state-retry" bindtap="onOpenSetting">{{t.openSetting}}</view>
+            </view>
+
+            <!-- 加载中 -->
+            <view class="state-block" wx:elif="{{listState === 'loading'}}">
+                <text class="state-title">{{t.loadingNearby}}</text>
+            </view>
+
+            <!-- 加载失败 -->
+            <view class="state-block" wx:elif="{{listState === 'error'}}">
+                <text class="state-title">{{t.loadFailed}}</text>
+                <text class="state-desc">{{errorMessage}}</text>
+                <view class="state-retry" bindtap="onRetry">{{t.retry}}</view>
+            </view>
+
+            <!-- 空态 -->
+            <view class="state-block" wx:elif="{{listState === 'empty'}}">
+                <text class="state-emoji">🛝</text>
+                <text class="state-title">{{t.emptyTitle}}</text>
+                <text class="state-desc">{{t.emptyDesc}}</text>
+                <view class="state-retry" bindtap="onGoShare">{{t.emptyBtn}}</view>
+            </view>
+
+            <!-- 列表 -->
+            <block wx:else>
+                <view
+                    wx:for="{{list}}"
+                    wx:key="id"
+                    id="item-{{item.id}}"
+                    class="card item {{activeId === item.id ? 'item-active' : ''}}"
+                    data-id="{{item.id}}"
+                    bindtap="onCardTap"
+                >
+                    <image
+                        wx:if="{{item.coverPath && covers[item.coverPath]}}"
+                        class="item-cover"
+                        src="{{covers[item.coverPath]}}"
+                        mode="aspectFill"
+                    />
+                    <view wx:else class="item-cover item-cover-empty">
+                        <text class="item-cover-emoji">🛝</text>
+                    </view>
+                    <view class="item-body">
+                        <view class="item-top">
+                            <text class="item-name">{{item.name}}</text>
+                            <text class="item-distance">{{item.distanceText}}</text>
+                        </view>
+                        <view class="item-rating">
+                            <text class="stars">{{item.stars}}</text>
+                            <text class="item-rating-text">{{fmt.reviewMeta(lang, item.ratingAvg, item.ratingCount)}}</text>
+                        </view>
+                        <text class="item-address" wx:if="{{item.address}}">{{item.address}}</text>
+                        <view class="item-tags" wx:if="{{item.tags.length > 0}}">
+                            <text class="tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{fmt.tag(lang, tag)}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="list-end">
+                    <text wx:if="{{totalCount >= 300}}">{{t.limit300}}</text>
+                    <text wx:else>{{t.endLine}}</text>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>

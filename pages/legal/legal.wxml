@@ -1,0 +1,26 @@
+<view class="page">
+    <scroll-view scroll-x class="tabs" enhanced show-scrollbar="{{false}}">
+        <view class="tabs-inner">
+            <view
+                wx:for="{{tabs}}"
+                wx:key="key"
+                class="tab {{activeKey === item.key ? 'tab-active' : ''}}"
+                data-key="{{item.key}}"
+                bindtap="onTabTap"
+            >{{item.label}}</view>
+        </view>
+    </scroll-view>
+
+    <view class="doc">
+        <text class="doc-title">{{title}}</text>
+        <block wx:for="{{sections}}" wx:key="key">
+            <text wx:if="{{item.type === 'h'}}" class="doc-h">{{item.text}}</text>
+            <view wx:elif="{{item.type === 'li'}}" class="doc-li">
+                <text class="doc-dot">·</text>
+                <text class="doc-p">{{item.text}}</text>
+            </view>
+            <text wx:else class="doc-p">{{item.text}}</text>
+        </block>
+        <text class="doc-foot">{{footText}}</text>
+    </view>
+</view>

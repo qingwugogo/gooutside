@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "写评价",
+  "usingComponents": {
+    "login-panel": "../../components/login-panel/login-panel"
+  }
+}

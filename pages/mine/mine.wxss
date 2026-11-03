@@ -1,0 +1,233 @@
+.page {
+    min-height: 100vh;
+    padding: 24rpx;
+    box-sizing: border-box;
+}
+
+/* 未登录 */
+.login-hero {
+    text-align: center;
+    padding: 60rpx 0 20rpx;
+}
+
+.login-emoji {
+    font-size: 96rpx;
+    display: block;
+    margin-bottom: 16rpx;
+}
+
+.login-slogan {
+    font-size: 26rpx;
+    color: #8a8f99;
+}
+
+.login-wrap {
+    padding: 20rpx 0 40rpx;
+}
+
+/* 头部 */
+.profile {
+    display: flex;
+    align-items: center;
+    padding: 28rpx;
+    margin-bottom: 32rpx;
+}
+
+.avatar {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    background: #E9F2ED;
+    color: #2E7D5B;
+    font-size: 40rpx;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profile-meta {
+    flex: 1;
+    min-width: 0;
+    margin-left: 20rpx;
+}
+
+.profile-name {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #22262B;
+}
+
+.profile-sub {
+    display: block;
+    font-size: 22rpx;
+    color: #8a8f99;
+    margin-top: 6rpx;
+}
+
+.signout {
+    flex-shrink: 0;
+    font-size: 24rpx;
+    color: #8a8f99;
+    padding: 10rpx 20rpx;
+}
+
+/* 分组 */
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 8rpx 8rpx 16rpx;
+}
+
+.section-title {
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #22262B;
+}
+
+.section-sub {
+    font-size: 24rpx;
+    color: #8a8f99;
+}
+
+.empty-mini {
+    padding: 32rpx;
+    text-align: center;
+    margin-bottom: 24rpx;
+}
+
+.empty-mini-text {
+    display: block;
+    font-size: 24rpx;
+    color: #8a8f99;
+}
+
+.empty-mini-btn {
+    display: inline-block;
+    margin-top: 20rpx;
+    padding: 12rpx 44rpx;
+    border-radius: 999rpx;
+    background: #2E7D5B;
+    color: #ffffff;
+    font-size: 26rpx;
+}
+
+/* 行卡片 */
+.row {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.row-cover {
+    width: 110rpx;
+    height: 110rpx;
+    border-radius: 12rpx;
+    flex-shrink: 0;
+    background: #EDF1EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-cover-emoji {
+    font-size: 48rpx;
+}
+
+.row-stars {
+    font-size: 26rpx;
+    color: #F5A93F;
+    text-align: center;
+}
+
+.row-body {
+    flex: 1;
+    min-width: 0;
+    margin-left: 20rpx;
+}
+
+.row-name {
+    display: block;
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #22262B;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 8rpx;
+}
+
+.row-content {
+    display: block;
+    font-size: 24rpx;
+    color: #8a8f99;
+    margin-top: 6rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row-sub {
+    font-size: 22rpx;
+    color: #b3b8bf;
+    margin-left: 10rpx;
+}
+
+.row-arrow {
+    flex-shrink: 0;
+    margin-left: 12rpx;
+    font-size: 40rpx;
+    color: #c6ccc6;
+}
+
+.bottom-space {
+    height: 40rpx;
+}
+
+/* 协议与数据 */
+.menu {
+    padding: 6rpx 28rpx;
+}
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26rpx 0;
+    border-bottom: 1rpx solid #F1F3F0;
+}
+
+.menu-row:last-child {
+    border-bottom: none;
+}
+
+.menu-label {
+    font-size: 27rpx;
+    color: #3A4048;
+}
+
+.menu-danger {
+    color: #D64541;
+}
+
+.menu-arrow {
+    color: #C3C9D0;
+    font-size: 30rpx;
+}
+
+.menu-note {
+    display: block;
+    margin: 14rpx 8rpx 0;
+    font-size: 22rpx;
+    line-height: 1.6;
+    color: #A0A7B0;
+}

@@ -1,0 +1,135 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="page">
+    <view class="state-block" wx:if="{{authState === 'checking'}}">
+        <text class="state-title">{{t.checking}}</text>
+    </view>
+
+    <!-- 未登录 -->
+    <block wx:elif="{{authState === 'signed-out'}}">
+        <view class="login-hero">
+            <text class="login-emoji">🛝</text>
+            <text class="login-slogan">{{t.loginSlogan}}</text>
+        </view>
+        <view class="login-wrap">
+            <login-panel bind:signedin="onSignedIn" />
+        </view>
+    </block>
+
+    <!-- 已登录 -->
+    <block wx:else>
+        <view class="card profile">
+            <view class="avatar">{{avatarText}}</view>
+            <view class="profile-meta">
+                <text class="profile-name">{{displayName}}</text>
+                <text class="profile-sub">{{t.program}}</text>
+            </view>
+            <text class="signout" bindtap="onSignOut">{{t.signOut}}</text>
+        </view>
+
+        <view class="state-block" wx:if="{{loading}}">
+            <text class="state-title">{{t.checking}}</text>
+        </view>
+        <view class="state-block" wx:elif="{{loadError}}">
+            <text class="state-title">{{t.loadFailed}}</text>
+            <text class="state-desc">{{loadError}}</text>
+        </view>
+
+        <block wx:else>
+            <!-- 我分享的 -->
+            <view class="section-head">
+                <text class="section-title">{{t.myPg}}</text>
+                <text class="section-sub">{{fmt.cnt(lang, playgrounds.length, ' 个', '')}}</text>
+            </view>
+            <view class="card empty-mini" wx:if="{{playgrounds.length === 0}}">
+                <text class="empty-mini-text">{{t.emptyPg}}</text>
+                <view class="empty-mini-btn" bindtap="onGoShare">{{t.goShare}}</view>
+            </view>
+            <view
+                wx:for="{{playgrounds}}"
+                wx:key="id"
+                class="card row"
+                data-id="{{item.id}}"
+                bindtap="onPlaygroundTap"
+            >
+                <image
+                    wx:if="{{item.coverPath && pgCovers[item.coverPath]}}"
+                    class="row-cover"
+                    src="{{pgCovers[item.coverPath]}}"
+                    mode="aspectFill"
+                />
+                <view wx:else class="row-cover row-cover-empty">
+                    <text class="row-cover-emoji">🛝</text>
+                </view>
+                <view class="row-body">
+                    <text class="row-name">{{item.name}}</text>
+                    <view class="row-meta">
+                        <text class="stars">{{item.stars}}</text>
+                        <text class="row-sub">{{fmt.reviewMeta(lang, item.avg, item.reviewCount)}}</text>
+                    </view>
+                </view>
+                <text class="row-arrow">›</text>
+            </view>
+
+            <!-- 我的评价 -->
+            <view class="section-head">
+                <text class="section-title">{{t.myRv}}</text>
+                <text class="section-sub">{{fmt.cnt(lang, reviews.length, ' 条', '')}}</text>
+            </view>
+            <view class="card empty-mini" wx:if="{{reviews.length === 0}}">
+                <text class="empty-mini-text">{{t.emptyRv}}</text>
+            </view>
+            <view
+                wx:for="{{reviews}}"
+                wx:key="id"
+                class="card row"
+                data-pid="{{item.playgroundId}}"
+                bindtap="onReviewTap"
+            >
+                <image
+                    wx:if="{{item.coverPath && rvCovers[item.coverPath]}}"
+                    class="row-cover"
+                    src="{{rvCovers[item.coverPath]}}"
+                    mode="aspectFill"
+                />
+                <view wx:else class="row-cover row-cover-empty">
+                    <text class="row-stars">{{item.stars}}</text>
+                </view>
+                <view class="row-body">
+                    <text class="row-name">{{item.playgroundName}}</text>
+                    <text class="row-content" wx:if="{{item.content}}">{{item.content}}</text>
+                    <text class="row-sub">{{item.dateText}}</text>
+                </view>
+                <text class="row-arrow">›</text>
+            </view>
+        </block>
+
+        <!-- 协议与数据 -->
+        <view class="section-head">
+            <text class="section-title">{{t.legalTitle}}</text>
+        </view>
+        <view class="card menu">
+            <view class="menu-row" bindtap="onToggleLang">
+                <text class="menu-label">{{t.langLabel}}</text>
+                <text class="menu-arrow">{{lang === 'en' ? 'English ›' : '中文 ›'}}</text>
+            </view>
+            <view class="menu-row" data-type="terms" bindtap="onOpenLegal">
+                <text class="menu-label">{{t.mTerms}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="menu-row" data-type="privacy" bindtap="onOpenLegal">
+                <text class="menu-label">{{t.mPrivacy}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="menu-row" data-type="children" bindtap="onOpenLegal">
+                <text class="menu-label">{{t.mChildren}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+            <view class="menu-row" bindtap="onDeleteAllData">
+                <text class="menu-label menu-danger">{{t.mDelete}}</text>
+                <text class="menu-arrow">›</text>
+            </view>
+        </view>
+        <text class="menu-note">{{t.deleteNote}}</text>
+        <view class="bottom-space"></view>
+    </block>
+</view>

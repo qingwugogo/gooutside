@@ -1,0 +1,178 @@
+// 合规文本（中英双语）：用户协议 / 隐私政策 / 儿童个人信息保护规则
+// 注意：上线前请把「运营者」占位替换为你的真实主体名称与联系方式，并请律师复核。
+//法律声明：中文版为唯一有效版本，英文版仅供参考。
+
+const UPDATED_AT = '2026年11月2日';
+const UPDATED_AT_EN = 'November 2, 2026';
+
+const OPERATOR_ZH = '本小程序的运营者（以下简称“我们”）';
+const OPERATOR_EN = 'the operator of this Mini Program ("we")';
+
+const TERMS_ZH = [
+    { type: 'p', text: `更新日期：${UPDATED_AT}` },
+    { type: 'h', text: '一、协议范围' },
+    { type: 'p', text: `本协议是你与${OPERATOR_ZH}之间就使用本小程序（以下简称“本服务”）订立的协议。你开始使用本服务，即视为已阅读并同意本协议全部内容。` },
+    { type: 'h', text: '二、服务内容' },
+    { type: 'p', text: '本服务提供免费儿童游乐场的信息检索、地图定位、用户评价与场地分享功能。所有场地信息由用户上传或整理自公开信息，仅供参考，不构成任何形式的承诺或担保。' },
+    { type: 'h', text: '三、账号与登录' },
+    { type: 'p', text: '你可以通过微信授权或邮箱验证码登录。你应妥善保管自己的账号，账号下的所有行为由你本人负责。' },
+    { type: 'h', text: '四、用户发布规范' },
+    { type: 'p', text: '你发布的内容（含名称、介绍、评价、照片）不得含有以下信息：' },
+    { type: 'li', text: '违反法律法规、危害国家安全、涉黄涉赌涉毒的内容；' },
+    { type: 'li', text: '侮辱、诽谤、侵犯他人合法权益的内容；' },
+    { type: 'li', text: '广告引流、联系方式、外部链接等与游乐场体验无关的商业信息；' },
+    { type: 'li', text: '涉及军事管理区、涉密单位等敏感地点，或未经允许拍摄的场所内部照片；' },
+    { type: 'li', text: '未取得权利人同意而上传的他人肖像、他人作品。' },
+    { type: 'p', text: '你承诺对发布的内容拥有合法权利；内容包含未成年人或他人肖像的，你已取得其监护人/本人的同意。' },
+    { type: 'h', text: '五、内容审核与处理' },
+    { type: 'p', text: '我们采用机器过滤、人工抽查与用户举报相结合的方式管理内容。对被举报达到一定次数或经核实违规的内容，我们会采取隐藏、删除等措施，并可视情况限制账号功能。' },
+    { type: 'h', text: '六、知识产权' },
+    { type: 'p', text: '你发布的内容，其著作权归你所有；你授予我们在本服务范围内免费展示、存储、必要转码的权利。本小程序的界面、图标、代码等归我们所有。' },
+    { type: 'h', text: '七、免责声明' },
+    { type: 'p', text: '场地信息可能因时间推移而变化（关闭、收费、设施损坏等），请以现场实际情况为准。你在场地内的人身与财产安全由你自行负责，本服务不承担因使用信息而产生的任何责任。' },
+    { type: 'h', text: '八、协议变更与终止' },
+    { type: 'p', text: '我们可能适时修订本协议，修订后在页面公示即生效。你若不同意修订内容，应停止使用本服务。' },
+    { type: 'h', text: '九、联系方式' },
+    { type: 'p', text: '如对本协议有疑问，或需投诉侵权内容，请通过「我的 - 意见反馈」联系我们，我们将在 15 个工作日内处理。' },
+];
+
+const TERMS_EN = [
+    { type: 'p', text: `Last updated: ${UPDATED_AT_EN}` },
+    { type: 'p', text: 'The Chinese version of these terms is the sole authoritative version. This English translation is provided for convenience only.' },
+    { type: 'h', text: '1. Scope' },
+    { type: 'p', text: `These terms form an agreement between you and ${OPERATOR_EN} regarding the use of this Mini Program (the "Service"). By using the Service you are deemed to have read and accepted these terms in full.` },
+    { type: 'h', text: '2. The Service' },
+    { type: 'p', text: 'The Service provides search, map location, user reviews and sharing of free children\'s playgrounds. All place information is uploaded by users or compiled from public sources, for reference only, and constitutes no warranty of any kind.' },
+    { type: 'h', text: '3. Accounts' },
+    { type: 'p', text: 'You may sign in via WeChat authorization or an email verification code. Keep your account safe; all activity under your account is your responsibility.' },
+    { type: 'h', text: '4. Content rules' },
+    { type: 'p', text: 'Content you post (names, descriptions, reviews, photos) must not contain:' },
+    { type: 'li', text: 'content that violates laws, endangers national security, or involves pornography, gambling or drugs;' },
+    { type: 'li', text: 'insults, defamation, or infringement of others\' lawful rights;' },
+    { type: 'li', text: 'advertising, contact details, external links or other commercial material unrelated to playground experiences;' },
+    { type: 'li', text: 'sensitive locations such as military zones or classified sites, or photos taken inside premises without permission;' },
+    { type: 'li', text: 'portraits or works of others uploaded without the right holder\'s consent.' },
+    { type: 'p', text: 'You warrant that you lawfully own the content you post, and that guardian/personal consent has been obtained where minors or others appear.' },
+    { type: 'h', text: '5. Moderation' },
+    { type: 'p', text: 'We manage content through automated filtering, sampling and user reports. Content that is repeatedly reported or verified as violating rules may be hidden or removed, and accounts may be restricted.' },
+    { type: 'h', text: '6. Intellectual property' },
+    { type: 'p', text: 'You own the copyright to content you post; you grant us a free licence to display, store and transcode it within the Service. The interface, icons and code of this Mini Program are ours.' },
+    { type: 'h', text: '7. Disclaimer' },
+    { type: 'p', text: 'Place information may change over time (closed, now charging, damaged facilities). Verify on site. You are responsible for your own safety and property; we accept no liability arising from use of the information.' },
+    { type: 'h', text: '8. Changes and termination' },
+    { type: 'p', text: 'We may revise these terms; revised terms take effect once published on this page. If you disagree, stop using the Service.' },
+    { type: 'h', text: '9. Contact' },
+    { type: 'p', text: 'Questions or copyright complaints: reach us via "Me - Feedback" in the Mini Program. We will respond within 15 business days.' },
+];
+
+const PRIVACY_ZH = [
+    { type: 'p', text: `更新日期：${UPDATED_AT}` },
+    { type: 'p', text: '我们深知个人信息对你的重要性，并将按照《个人信息保护法》《网络安全法》等法律法规处理你的个人信息。' },
+    { type: 'h', text: '一、我们收集哪些信息' },
+    { type: 'li', text: '位置信息（敏感个人信息）：仅在你授权后获取一次当前定位，用于计算附近游乐场的距离并按范围筛选；发布场地时你可在图上选点。我们不会在后台持续获取你的位置。' },
+    { type: 'li', text: '账号标识：微信登录时由微信提供的用户唯一标识（openid）；邮箱登录时的邮箱地址。用于区分你的内容归属。' },
+    { type: 'li', text: '你主动发布的内容：场地名称、位置、介绍、评分、评价文字与照片。这些内容会公开展示给其他用户。' },
+    { type: 'li', text: '设备与日志信息：为排查故障和保障安全，可能记录必要的运行日志（不含你的通讯内容）。' },
+    { type: 'h', text: '二、我们如何使用信息' },
+    { type: 'p', text: '仅用于实现本服务的功能：附近搜索、内容展示、内容审核、账号与内容管理、安全风控。我们不会将你的信息用于与本服务无关的用途，也不会出售你的个人信息。' },
+    { type: 'h', text: '三、关于位置信息' },
+    { type: 'p', text: '位置信息属于敏感个人信息，我们仅在获得你的单独同意后收集，且只用于就近检索。你可以随时在微信「设置 - 隐私 - 授权管理」中关闭位置授权；关闭后仍可浏览，但无法按距离查找。' },
+    { type: 'h', text: '四、关于照片' },
+    { type: 'p', text: '你上传的照片将存储在我们的云存储空间并公开展示。请勿上传包含他人面部、证件、车牌、门牌号等可识别信息的内容，或上传前自行打码。' },
+    { type: 'h', text: '五、信息的存储与保护' },
+    { type: 'p', text: '信息存储于中国境内的云服务器，保存期限为实现服务目的所必需的最短时间；法律法规另有规定的，按规定执行。我们采取访问控制、传输加密等措施保护你的信息。' },
+    { type: 'h', text: '六、信息的共享' },
+    { type: 'p', text: '除以下情形外，我们不会向第三方共享你的个人信息：获得你的单独同意；法律法规要求；为提供地图与登录服务而必要的微信/腾讯地图能力调用。' },
+    { type: 'h', text: '七、你的权利' },
+    { type: 'li', text: '查阅、更正：在「我的」页面查看你发布的内容。' },
+    { type: 'li', text: '删除：可逐条删除自己的评价与场地，或在「我的 - 删除我的全部数据」一次性删除你发布的所有内容与照片。' },
+    { type: 'li', text: '撤回同意：关闭位置授权或退出登录。' },
+    { type: 'li', text: '注销：通过「我的 - 删除我的全部数据」清空内容后联系我们注销账号。' },
+    { type: 'h', text: '八、未成年人保护' },
+    { type: 'p', text: '本服务面向家长用户。不满 14 周岁未成年人的个人信息属于敏感个人信息，我们按《儿童个人信息网络保护规定》单独处理，详见《儿童个人信息保护规则》。' },
+    { type: 'h', text: '九、联系我们' },
+    { type: 'p', text: '如对本政策有疑问、投诉或行使上述权利，请通过「我的 - 意见反馈」联系我们，我们将在 15 个工作日内答复。' },
+];
+
+const PRIVACY_EN = [
+    { type: 'p', text: `Last updated: ${UPDATED_AT_EN}` },
+    { type: 'p', text: 'The Chinese version of this policy is the sole authoritative version. This English translation is provided for convenience only.' },
+    { type: 'h', text: '1. What we collect' },
+    { type: 'li', text: 'Location (sensitive personal information): a one-time fix of your current location after you authorize, to compute distances and filter nearby playgrounds; you may also pick a point on the map when sharing a place. We never track your location in the background.' },
+    { type: 'li', text: 'Account identifiers: the WeChat openid (from WeChat sign-in) or your email address. Used to attribute content to you.' },
+    { type: 'li', text: 'Content you post: place name, location, description, ratings, review text and photos. This is displayed publicly to other users.' },
+    { type: 'li', text: 'Device and log data: operational logs necessary for troubleshooting and security (excluding your communications).' },
+    { type: 'h', text: '2. How we use it' },
+    { type: 'p', text: 'Only to operate the Service: nearby search, content display, moderation, account and content management, and security. We do not use your information for unrelated purposes and never sell it.' },
+    { type: 'h', text: '3. Location' },
+    { type: 'p', text: 'Location is sensitive personal information, collected only after your separate consent and only for nearby search. You can revoke it anytime in WeChat "Settings - Privacy - Authorization"; browsing still works, but distance search will not.' },
+    { type: 'h', text: '4. Photos' },
+    { type: 'p', text: 'Photos you upload are stored in our cloud storage and shown publicly. Do not upload identifiable faces, ID documents, licence plates or house numbers without blurring them first.' },
+    { type: 'h', text: '5. Storage and security' },
+    { type: 'p', text: 'Data is stored on cloud servers within mainland China and kept no longer than necessary for the Service\'s purposes, unless laws require otherwise. We apply access control and transport encryption.' },
+    { type: 'h', text: '6. Sharing' },
+    { type: 'p', text: 'We do not share your personal information with third parties except: with your separate consent; where laws require; or the WeChat/Tencent Maps capabilities necessary to provide map and sign-in services.' },
+    { type: 'h', text: '7. Your rights' },
+    { type: 'li', text: 'Access & correction: view your content on the "Me" page.' },
+    { type: 'li', text: 'Deletion: delete individual reviews/places, or "Me - Delete all my data" to remove everything at once.' },
+    { type: 'li', text: 'Withdraw consent: revoke location authorization or sign out.' },
+    { type: 'li', text: 'Account closure: clear your content via "Delete all my data", then contact us.' },
+    { type: 'h', text: '8. Minors' },
+    { type: 'p', text: 'The Service is aimed at parents. Personal information of children under 14 is handled separately under the Provisions on the Protection of Children\'s Personal Information — see our Children\'s Privacy Rules.' },
+    { type: 'h', text: '9. Contact' },
+    { type: 'p', text: 'Questions, complaints or rights requests: "Me - Feedback". We respond within 15 business days.' },
+];
+
+const CHILDREN_ZH = [
+    { type: 'p', text: `更新日期：${UPDATED_AT}` },
+    { type: 'p', text: '本服务的使用者主要是带孩子的家长。我们充分认识到未成年人个人信息保护的重要性，特制定本规则。' },
+    { type: 'h', text: '一、我们不主动收集儿童信息' },
+    { type: 'p', text: '本服务不面向儿童单独提供服务，不收集儿童的姓名、生日、身份证件、学校、住址等身份信息，也不会要求儿童注册账号。' },
+    { type: 'h', text: '二、照片中可能出现的儿童影像' },
+    { type: 'p', text: '当你上传游乐场照片时，照片中可能出现儿童。请在发布前确认：' },
+    { type: 'li', text: '你是该儿童的监护人，或已取得其监护人的明确同意；' },
+    { type: 'li', text: '尽量选择不含儿童正脸、可识别特征的照片；' },
+    { type: 'li', text: '不上传带有校服校徽、门牌、车牌等可定位到具体儿童的信息。' },
+    { type: 'h', text: '三、监护人同意的取得' },
+    { type: 'p', text: '发布页会请你勾选确认“已获得照片中人物（含未成年人）监护人的同意”。该勾选构成我们保存的同意记录。' },
+    { type: 'h', text: '四、删除与撤回' },
+    { type: 'p', text: '监护人可随时要求删除涉及儿童的照片：作者本人可在「我的」中删除对应内容；其他人可通过举报功能或联系我们，我们核实后将及时删除。' },
+    { type: 'h', text: '五、联系我们' },
+    { type: 'p', text: '涉及儿童信息的投诉，我们会优先处理，并在 7 个工作日内答复。' },
+];
+
+const CHILDREN_EN = [
+    { type: 'p', text: `Last updated: ${UPDATED_AT_EN}` },
+    { type: 'p', text: 'The Chinese version is the sole authoritative version; this translation is for convenience only.' },
+    { type: 'h', text: '1. We do not actively collect children\'s data' },
+    { type: 'p', text: 'The Service is not directed at children. We do not collect children\'s names, birthdays, ID documents, schools or addresses, and we never ask children to register accounts.' },
+    { type: 'h', text: '2. Children may appear in photos' },
+    { type: 'p', text: 'Playground photos may include children. Before posting, please confirm that:' },
+    { type: 'li', text: 'you are the child\'s guardian, or you have the guardian\'s explicit consent;' },
+    { type: 'li', text: 'where possible, photos do not show children\'s full faces or other identifying features;' },
+    { type: 'li', text: 'no school uniforms/logos, house numbers or licence plates that could locate a specific child are visible.' },
+    { type: 'h', text: '3. Guardian consent' },
+    { type: 'p', text: 'The posting form asks you to confirm that guardian consent has been obtained for anyone shown (including minors). That confirmation constitutes our record of consent.' },
+    { type: 'h', text: '4. Deletion and withdrawal' },
+    { type: 'p', text: 'Guardians may request removal of photos involving children at any time: authors can delete their own content via "Me"; anyone may report content or contact us, and we will remove verified content promptly.' },
+    { type: 'h', text: '5. Contact' },
+    { type: 'p', text: 'Complaints involving children\'s information are prioritized and answered within 7 business days.' },
+];
+
+module.exports = {
+    DOCS: {
+        terms: {
+            zh: { title: '用户协议', sections: TERMS_ZH },
+            en: { title: 'Terms of Service', sections: TERMS_EN },
+        },
+        privacy: {
+            zh: { title: '隐私政策', sections: PRIVACY_ZH },
+            en: { title: 'Privacy Policy', sections: PRIVACY_EN },
+        },
+        children: {
+            zh: { title: '儿童个人信息保护规则', sections: CHILDREN_ZH },
+            en: { title: "Children's Privacy Rules", sections: CHILDREN_EN },
+        },
+    },
+    ORDER: ['terms', 'privacy', 'children'],
+};

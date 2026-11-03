@@ -1,0 +1,157 @@
+page {
+    min-height: 100%;
+    background: #F6F7F5;
+    color: #22262B;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-size: 28rpx;
+}
+
+/* ===== 通用状态块（loading / empty / error） ===== */
+.state-block {
+    padding: 100rpx 40rpx;
+    text-align: center;
+    color: #8a8f99;
+}
+
+.state-title {
+    display: block;
+    font-size: 30rpx;
+    color: #4b5158;
+    margin-bottom: 12rpx;
+}
+
+.state-desc {
+    display: block;
+    font-size: 24rpx;
+    line-height: 1.6;
+}
+
+.state-retry {
+    margin-top: 32rpx;
+    display: inline-block;
+    padding: 14rpx 48rpx;
+    border-radius: 999rpx;
+    background: #2E7D5B;
+    color: #ffffff;
+    font-size: 26rpx;
+}
+
+/* ===== 通用卡片 ===== */
+.card {
+    background: #ffffff;
+    border-radius: 20rpx;
+    box-shadow: 0 4rpx 16rpx rgba(34, 38, 43, 0.05);
+}
+
+/* ===== 通用主按钮 ===== */
+.btn-primary {
+    background: #2E7D5B;
+    color: #ffffff;
+    border-radius: 16rpx;
+    font-size: 30rpx;
+}
+
+.btn-primary[disabled] {
+    background: #a8c8b8;
+    color: #ffffff;
+}
+
+.btn-plain {
+    background: #ffffff;
+    color: #2E7D5B;
+    border: 2rpx solid #2E7D5B;
+    border-radius: 16rpx;
+    font-size: 30rpx;
+}
+
+/* ===== 星级 ===== */
+.stars {
+    color: #F5A93F;
+    font-size: 26rpx;
+}
+
+.stars-dim {
+    color: #d9dde2;
+    font-size: 26rpx;
+}
+
+/* ===== 表单 ===== */
+.form-item {
+    margin-bottom: 32rpx;
+}
+
+.form-label {
+    display: block;
+    font-size: 28rpx;
+    color: #22262B;
+    font-weight: 600;
+    margin-bottom: 16rpx;
+}
+
+.form-input {
+    background: #ffffff;
+    border-radius: 14rpx;
+    padding: 20rpx 24rpx;
+    font-size: 28rpx;
+    border: 2rpx solid #E7EAE6;
+}
+
+.form-textarea {
+    background: #ffffff;
+    border-radius: 14rpx;
+    padding: 20rpx 24rpx;
+    font-size: 28rpx;
+    width: auto;
+    border: 2rpx solid #E7EAE6;
+    min-height: 160rpx;
+}
+
+.form-error {
+    color: #D64541;
+    font-size: 24rpx;
+    margin-top: 12rpx;
+    display: block;
+}
+
+/* ===== 合规勾选（发布页共用） ===== */
+.consent {
+    margin-top: 28rpx;
+    padding-top: 24rpx;
+    border-top: 1rpx solid #EDEFEC;
+}
+
+.consent-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 10rpx 0;
+}
+
+.consent-box {
+    flex-shrink: 0;
+    width: 34rpx;
+    height: 34rpx;
+    margin: 4rpx 14rpx 0 0;
+    border-radius: 8rpx;
+    border: 2rpx solid #C9D0CB;
+    color: #ffffff;
+    font-size: 24rpx;
+    line-height: 34rpx;
+    text-align: center;
+    background: #ffffff;
+}
+
+.consent-box-on {
+    background: #2E7D5B;
+    border-color: #2E7D5B;
+}
+
+.consent-text {
+    flex: 1;
+    font-size: 23rpx;
+    line-height: 1.7;
+    color: #7d858f;
+}
+
+.consent-link {
+    color: #2E7D5B;
+}
